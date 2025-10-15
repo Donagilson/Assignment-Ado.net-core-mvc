@@ -1,4 +1,4 @@
-namespace PatientManagementSystem2025.Models
+namespace ProfessorManagementSystem.Models
 {
     public class ErrorViewModel
     {

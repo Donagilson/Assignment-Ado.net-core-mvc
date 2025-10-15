@@ -1,0 +1,43 @@
+﻿@model IEnumerable<ProfessorManagementSystem.Models.Professor>
+
+<h2>Professor List</h2>
+<a asp-action="Create" class="btn btn-primary mb-2">Add Professor</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>HOD</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Department</th>
+            <th>Salary</th>
+            <th>Joining Date</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Active</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var prof in Model)
+        {
+            <tr>
+                <td>@prof.ProfessorId</td>
+                <td>@prof.HOD</td>
+                <td>@prof.FirstName</td>
+                <td>@prof.LastName</td>
+                <td>@prof.Department?.DepartmentName</td>
+                <td>@prof.Salary</td>
+                <td>@prof.JoiningDate.ToShortDateString()</td>
+                <td>@prof.DOB.ToShortDateString()</td>
+                <td>@prof.Gender</td>
+                <td>@(prof.IsActive ? "Yes" : "No")</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@prof.ProfessorId" class="btn btn-sm btn-warning">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@prof.ProfessorId" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -1,0 +1,70 @@
+﻿@model IEnumerable<PatientManagementSystem2025.Models.Patient>
+
+@{
+    ViewData["Title"] = "Patient List";
+}
+
+<h3 class="text-center mt-4">Patient List</h3>
+<hr />
+
+<div class="text-end mb-3">
+    <a asp-action="Create" class="btn btn-success">+ Add Patient</a>
+</div>
+
+<table class="table table-bordered table-striped table-hover align-middle">
+    <thead class="table-dark text-center">
+        <tr>
+            <th>Patient ID</th>
+            <th>Registration No</th>
+            <th>Name</th>
+            <th>DOB</th>
+            <th>Gender</th>
+            <th>Address</th>
+            <th>Phone No</th>
+            <th>Membership</th>
+            <th>Insurance Amt</th>
+            <th>Active</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody class="text-center">
+        @if (Model != null && Model.Any())
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.PatientId</td>
+                    <td>@item.RegistrationNo</td>
+                    <td>@item.PatientName</td>
+                    <td>@item.Dob.ToString("dd-MM-yyyy")</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Address</td>
+                    <td>@item.PhoneNo</td>
+                    <td>@item.Membership?.MemberDescrip</td>
+                    <td>@item.Membership?.InsureAmt.ToString("C")</td>
+                    <td>
+                        @if (item.IsActive)
+                        {
+                            <span class="badge bg-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-secondary">Inactive</span>
+                        }
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.PatientId" class="btn btn-sm btn-primary me-2">Edit</a>
+                        <a asp-action="Delete" asp-route-id="@item.PatientId" class="btn btn-sm btn-danger"
+                           onclick="return confirm('Are you sure you want to delete this patient?');">Delete</a>
+                    </td>
+                </tr>
+            }
+        }
+        else
+        {
+            <tr>
+                <td colspan="11" class="text-center text-muted">No patients found.</td>
+            </tr>
+        }
+    </tbody>
+</table>

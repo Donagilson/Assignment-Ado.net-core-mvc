@@ -1,0 +1,96 @@
+﻿@model PatientManagementSystem2025.Models.Patient
+
+@{
+    ViewData["Title"] = "Edit Patient";
+}
+
+<h4>Edit Patient</h4>
+<div class="row justify-content-center mt-4">
+    <div class="col-md-6">
+        <form asp-action="Edit" method="post">
+
+            <!--Validation Summary-->
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <!--PatientId (readonly)-->
+            <div class="form-group mb-3">
+                <label asp-for="PatientId" class="control-label">Patient ID</label>
+                <input asp-for="PatientId" class="form-control" readonly />
+            </div>
+
+            <!--Registration No-->
+            <div class="form-group mb-3">
+                <label asp-for="RegistrationNo" class="control-label">Registration No</label>
+                <input asp-for="RegistrationNo" class="form-control" />
+                <span asp-validation-for="RegistrationNo" class="text-danger"></span>
+            </div>
+
+            <!--Patient Name-->
+            <div class="form-group mb-3">
+                <label asp-for="PatientName" class="control-label">Patient Name</label>
+                <input asp-for="PatientName" class="form-control" />
+                <span asp-validation-for="PatientName" class="text-danger"></span>
+            </div>
+
+            <!--DOB-->
+            <div class="form-group mb-3">
+                <label asp-for="Dob" class="control-label">Date of Birth</label>
+                <input asp-for="Dob" type="date" class="form-control" />
+                <span asp-validation-for="Dob" class="text-danger"></span>
+            </div>
+
+            <!--Gender-->
+            <div class="form-group mb-3">
+                <label asp-for="Gender" class="control-label">Gender</label>
+                <select asp-for="Gender" class="form-select">
+                    <option value="">--Select Gender--</option>
+                    <option value="Male" selected="@Model.Gender == " Male"">Male</option>
+                    <option value="Female" selected="@Model.Gender == " Female"">Female</option>
+                </select>
+                <span asp-validation-for="Gender" class="text-danger"></span>
+            </div>
+
+            <!--Address-->
+            <div class="form-group mb-3">
+                <label asp-for="Address" class="control-label">Address</label>
+                <textarea asp-for="Address" class="form-control" rows="2"></textarea>
+                <span asp-validation-for="Address" class="text-danger"></span>
+            </div>
+
+            <!--PhoneNo-->
+            <div class="form-group mb-3">
+                <label asp-for="PhoneNo" class="control-label">Phone Number</label>
+                <input asp-for="PhoneNo" class="form-control" />
+                <span asp-validation-for="PhoneNo" class="text-danger"></span>
+            </div>
+
+            <!--Membership Dropdown-->
+            <div class="form-group mb-3">
+                <label asp-for="MemberId" class="control-label">Membership</label>
+                <select asp-for="MemberId" class="form-control" asp-items="@(ViewBag.Memberships as IEnumerable<SelectListItem>)">
+                    <option value="">--Select Membership--</option>
+                </select>
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+
+            <!--IsActive Checkbox-->
+            <div class="form-check mb-3">
+                <input asp-for="IsActive" class="form-check-input" />
+                <label asp-for="IsActive" class="form-check-label">Is Active</label>
+            </div>
+
+            <!--Submit-->
+            <div class="text-center">
+                <button type="submit" class="btn btn-primary">Save</button>
+                <a asp-action="List" class="btn btn-secondary ms-2">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
